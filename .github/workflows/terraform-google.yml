@@ -76,13 +76,13 @@ jobs:
     - name: Terraform Init
       run: terraform init --backend-config=backend.hcl  
       env:
-        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+        GOOGLE_CREDENTIALS : ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       run: terraform plan -input=false -out .tfplan
       env:
-        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}      
+        GOOGLE_CREDENTIALS : ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}      
 
       # On push to "main", build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
@@ -90,4 +90,4 @@ jobs:
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       run: terraform apply ".tfplan" -auto-approve -input=false
       env:
-        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}      
+        GOOGLE_CREDENTIALS : ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}      

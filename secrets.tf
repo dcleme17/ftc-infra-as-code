@@ -21,3 +21,27 @@ resource "google_secret_manager_secret_iam_member" "token_private_key" {
   role = "roles/secretmanager.secretAccessor"
   member  = "serviceAccount:${var.service_account_email}"
 }
+
+resource "google_secret_manager_secret" "mongodb_url" {
+  project = var.project_id
+  secret_id = "MONGODB_URL"
+  replication {
+    user_managed {
+      replicas {
+        location = var.region 
+      }
+    }
+  }
+}
+
+resource "google_secret_manager_secret_version" "mongodb_url" {
+  secret = google_secret_manager_secret.mongodb_url.id
+  secret_data = "mongodb+srv://fiaptcgrupo22:mongo2024@serverlessinstance0.25wwxch.mongodb.net/?retryWrites=true&w=majority&appName=ServerlessInstance0"
+}
+
+resource "google_secret_manager_secret_iam_member" "mongodb_url" {
+  project = var.project_id
+  secret_id = google_secret_manager_secret.mongodb_url.secret_id
+  role = "roles/secretmanager.secretAccessor"
+  member  = "serviceAccount:${var.service_account_email}"
+}

@@ -45,3 +45,27 @@ resource "google_secret_manager_secret_iam_member" "mongodb_url" {
   role = "roles/secretmanager.secretAccessor"
   member  = "serviceAccount:${var.service_account_email}"
 }
+
+resource "google_secret_manager_secret" "service_account" {
+  project = var.project_id
+  secret_id = "GOOGLE_APPLICATION_CREDENTIALS"
+  replication {
+    user_managed {
+      replicas {
+        location = "southamerica-east1" 
+      }
+    }
+  }
+}
+
+resource "google_secret_manager_secret_version" "service_account" {
+  secret = google_secret_manager_secret.service_account.id
+  secret_data = file("oficina-facil-prd-c1ed73d0899a.json")
+}
+
+resource "google_secret_manager_secret_iam_member" "service_account" {
+  project = var.project_id
+  secret_id = google_secret_manager_secret.service_account.secret_id
+  role = "roles/secretmanager.secretAccessor"
+  member  = "serviceAccount:${var.service_account_email}"
+}

@@ -516,3 +516,6 @@ definitions:
 x-google-backend:
   address: https://backend-koxvlyfy2a-rj.a.run.app
   jwt_audience: https://backend-koxvlyfy2a-rj.a.run.app
+x-google-endpoints:
+- name: "backend-1l1ciflj1ia92.apigateway.oficina-facil-prd.cloud.goog"
+  allowCors: True  

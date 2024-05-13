@@ -3,7 +3,7 @@ info:
   version: 1.0.0
   title: Tech Challenge Fiap
   description: Conjuntos dde recursos e operações do Tech Challenge da FIAP
-host: localhost:31300
+host: backend-3nr8mc5lzu4e5.apigateway.oficina-facil-prd.cloud.goog
 basePath: /
 tags:
   - name: Cliente
@@ -517,5 +517,5 @@ x-google-backend:
   address: https://backend-koxvlyfy2a-rj.a.run.app
   jwt_audience: https://backend-koxvlyfy2a-rj.a.run.app
 x-google-endpoints:
-- name: "backend-1l1ciflj1ia92.apigateway.oficina-facil-prd.cloud.goog"
+- name: "backend-3nr8mc5lzu4e5.apigateway.oficina-facil-prd.cloud.goog"
   allowCors: True  

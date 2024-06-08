@@ -1,7 +1,7 @@
 resource "google_api_gateway_api" "default" {
   provider     = google-beta
   api_id       = "backend"
-  display_name = "backend"
+  display_name = "backend teste"
   project      = var.project_id
 }
 
